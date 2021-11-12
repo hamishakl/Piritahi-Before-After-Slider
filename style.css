@@ -28,10 +28,10 @@ body {
     background-size: 900px 100%;
 }
 #background-img {
-    background-image: url('andre-benz-WsxKHqrdibY-unsplash.jpeg');
+    background-image: url('after.jpeg');
 }
 #foreground-img {
-    background-image: url('nirmal-rajendharkumar-2mG8IdPFenU-unsplash.jpeg');
+    background-image: url('before.jpeg');
     width: 50%;
 }
 .container .slider {
