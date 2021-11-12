@@ -1,9 +1,10 @@
 const slider = document.getElementById("slider");
 
+const sliderButton = document.getElementById('slider-button')
 
 const change = (e) => {
   const sliderPos = e
   const fore = document.getElementById("foreground-img")
   fore.style.width = `${sliderPos}%`;
-  document.getElementById('slider-button').style.left= `calc(${sliderPos}% - 18px)`;
+  sliderButton.style.left= `calc(${sliderPos}% - 18px)`;
 };
