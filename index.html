@@ -1,4 +1,3 @@
-<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,41 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="imageContainer"></div>
-    <script src="index.js"></script>
-  </body>
-  </html> -->
-  
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
-      <link rel="stylesheet" href="style.css" />
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-    <div class="container" id="container">
-      <div id="img-wrap">
-        <div class="img" id="background-img"></div>
-        <div class="img" id="foreground-img"></div>
+    <div>
+      <div id="box">
+        <div class="container" id="container">
+          <div id="img-wrap">
+            <div class="img" id="background-img"></div>
+            <div class="img" id="foreground-img"></div>
+          </div>
+        </div>
       </div>
+      <div class="slider-button" id="slider-button"></div>
+      <input
+        type="range"
+        min="1"
+        value="50"
+        max="100"
+        class="slider"
+        name="slider"
+        id="slider"
+        oninput="change(this.value)"
+      />
     </div>
-    <div class="slider-button" id="slider-button"></div>
-    <input
-      type="range"
-      min="1"
-      value="50"
-      max="100"
-      class="slider"
-      name="slider"
-      id="slider"
-      oninput="change(this.value)"
-    />
     <script src="index.js"></script>
-</body>
+  </body>
 </html>

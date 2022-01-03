@@ -1,6 +1,5 @@
 "use strict";
 
-const imageUrl = "https://source.unsplash.com/random";
 const imageContainer = document.querySelector(".container");
 const hud = document.querySelector("#hud");
 
@@ -31,45 +30,17 @@ let displayImageCurrentX = 0;
 let displayImageCurrentY = 0;
 let displayImageCurrentScale = 1;
 
-// const container = document.createElement("div");
-// const beforeImg = document.createElement("div");
-// const afterImg = document.createElement("div");
-// const sliderButton = document.createElement("div");
-// const slider = document.createElement("input");
 const slider = document.getElementById("slider");
 
-const sliderButton = document.getElementById('slider-button')
+const sliderButton = document.getElementById("slider-button");
 
 const change = (e) => {
-  console.log('asdas')
-  const sliderPos = e
-  const fore = document.getElementById("foreground-img")
+  console.log("asdas");
+  const sliderPos = e;
+  const fore = document.getElementById("foreground-img");
   fore.style.width = `${sliderPos}%`;
-  sliderButton.style.left= `calc(${sliderPos}% - 18px)`;
+  sliderButton.style.left = `calc(${sliderPos}% - 18px)`;
 };
-// const loadupshit = () => {
-//   container.className = "container";
-//   beforeImg.id = "background-img";
-//   beforeImg.className = "img";
-//   afterImg.id = "foreground-img";
-//   afterImg.className = "img";
-//   sliderButton.className = "slider-button";
-//   sliderButton.id = "slider-button";
-//   slider.className = "slider";
-//   slider.id = "slider";
-//   slider.name = "slider";
-//   container.appendChild(beforeImg);
-//   container.appendChild(afterImg);
-//   container.appendChild(slider);
-//   container.appendChild(sliderButton);
-//   console.log("fuckion yholooo");
-  
-//   slider.setAttribute('type', 'range')
-//   slider.setAttribute('min', '1')
-//   slider.setAttribute('value', '50')
-//   slider.setAttribute('max', '100')
-//   slider.setAttribute('name', 'slider')  
-// };
 
 function resizeContainer() {
   containerWidth = imageContainer.offsetWidth;
@@ -84,11 +55,11 @@ function resizeContainer() {
       displayImageCurrentX,
       displayImageCurrentY,
       displayImageCurrentScale
-      );
-    }
+    );
   }
-  
-  resizeContainer();
+}
+
+resizeContainer();
 
 function clamp(value, min, max) {
   return Math.min(Math.max(min, value), max);
@@ -100,8 +71,7 @@ function clampScale(newScale) {
 
 window.addEventListener("resize", resizeContainer, true);
 
-const displayImage = document.getElementById('container');
-displayImage.src = imageUrl;
+const displayImage = document.getElementById("container");
 const sadg = () => {
   imageWidth = displayImage.width;
   imageHeight = displayImage.height;
@@ -111,7 +81,7 @@ const sadg = () => {
   rangeX = Math.max(0, displayDefaultWidth - containerWidth);
   rangeY = Math.max(0, displayDefaultHeight - containerHeight);
 };
-sadg()
+sadg();
 imageContainer.addEventListener(
   "wheel",
   (e) => {
@@ -144,7 +114,6 @@ function updateDisplayImage(x, y, scale) {
   displayImage.style.transform = transform;
   displayImage.style.WebkitTransform = transform;
   displayImage.style.msTransform = transform;
-  // updateHud();
 }
 
 function updateRange() {
@@ -164,30 +133,6 @@ function updateRange() {
   rangeMaxY = Math.round(rangeY / 2);
   rangeMinY = 0 - rangeMaxY;
 }
-
-// function updateHud() {
-//   let hudText = `<pre>
-// <b>Current</b>
-// <b>Scale:</b>     ${displayImageCurrentScale.toFixed(4)}
-// <b>X:</b>         ${displayImageCurrentX}
-// <b>Y:</b>         ${displayImageCurrentY}
-
-// <b>Range</b>
-// <b>rangeX:</b>    ${rangeX}
-// <b>rangeMinX:</b> ${rangeMinX}
-// <b>rangeMaxX:</b> ${rangeMaxX}
-
-// <b>rangeY:</b>    ${rangeY}
-// <b>rangeMinY:</b> ${rangeMinY}
-// <b>rangeMaxY:</b> ${rangeMaxY}
-
-// <b>Updated</b>
-// <b>Scale:</b>     ${displayImageScale.toFixed(4)}
-// <b>X:</b>         ${displayImageX}
-// <b>Y:</b>         ${displayImageY}
-// </pre>`;
-//   hud.innerHTML = hudText;
-// }
 
 const hammertime = new Hammer(imageContainer);
 
@@ -221,6 +166,3 @@ hammertime.on("panend pancancel pinchend pinchcancel", () => {
   displayImageX = displayImageCurrentX;
   displayImageY = displayImageCurrentY;
 });
-
-
-
