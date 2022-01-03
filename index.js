@@ -1,7 +1,7 @@
 "use strict";
 
 const imageUrl = "https://source.unsplash.com/random";
-const imageContainer = document.querySelector(".imageContainer");
+const imageContainer = document.querySelector(".container");
 const hud = document.querySelector("#hud");
 
 let minScale = 1;
@@ -31,42 +31,45 @@ let displayImageCurrentX = 0;
 let displayImageCurrentY = 0;
 let displayImageCurrentScale = 1;
 
-const container = document.createElement("div");
-const beforeImg = document.createElement("div");
-const afterImg = document.createElement("div");
-const sliderButton = document.createElement("div");
-const slider = document.createElement("input");
+// const container = document.createElement("div");
+// const beforeImg = document.createElement("div");
+// const afterImg = document.createElement("div");
+// const sliderButton = document.createElement("div");
+// const slider = document.createElement("input");
+const slider = document.getElementById("slider");
+
+const sliderButton = document.getElementById('slider-button')
 
 const change = (e) => {
-  const sliderPos = e;
-  afterImg.style.width = `${sliderPos}%`;
-  sliderButton.style.left = `calc(${sliderPos}% - 18px)`;
+  console.log('asdas')
+  const sliderPos = e
+  const fore = document.getElementById("foreground-img")
+  fore.style.width = `${sliderPos}%`;
+  sliderButton.style.left= `calc(${sliderPos}% - 18px)`;
 };
-
-
-const loadupshit = () => {
-  container.className = "container";
-  beforeImg.id = "background-img";
-  beforeImg.className = "img";
-  afterImg.id = "foreground-img";
-  afterImg.className = "img";
-  sliderButton.className = "slider-button";
-  sliderButton.id = "slider-button";
-  slider.className = "slider";
-  slider.id = "slider";
-  slider.name = "slider";
-  container.appendChild(beforeImg);
-  container.appendChild(afterImg);
-  container.appendChild(slider);
-  container.appendChild(sliderButton);
-  console.log("fuckion yholooo");
+// const loadupshit = () => {
+//   container.className = "container";
+//   beforeImg.id = "background-img";
+//   beforeImg.className = "img";
+//   afterImg.id = "foreground-img";
+//   afterImg.className = "img";
+//   sliderButton.className = "slider-button";
+//   sliderButton.id = "slider-button";
+//   slider.className = "slider";
+//   slider.id = "slider";
+//   slider.name = "slider";
+//   container.appendChild(beforeImg);
+//   container.appendChild(afterImg);
+//   container.appendChild(slider);
+//   container.appendChild(sliderButton);
+//   console.log("fuckion yholooo");
   
-  slider.setAttribute('type', 'range')
-  slider.setAttribute('min', '1')
-  slider.setAttribute('value', '50')
-  slider.setAttribute('max', '100')
-  slider.setAttribute('name', 'slider')  
-};
+//   slider.setAttribute('type', 'range')
+//   slider.setAttribute('min', '1')
+//   slider.setAttribute('value', '50')
+//   slider.setAttribute('max', '100')
+//   slider.setAttribute('name', 'slider')  
+// };
 
 function resizeContainer() {
   containerWidth = imageContainer.offsetWidth;
@@ -97,19 +100,16 @@ function clampScale(newScale) {
 
 window.addEventListener("resize", resizeContainer, true);
 
-const displayImage = document.createElement("div");
+const displayImage = document.getElementById('container');
 displayImage.src = imageUrl;
 const sadg = () => {
-  loadupshit();
   imageWidth = displayImage.width;
   imageHeight = displayImage.height;
-  imageContainer.appendChild(displayImage);
   displayImage.addEventListener("mousedown", (e) => e.preventDefault(), false);
   displayDefaultWidth = displayImage.offsetWidth;
   displayDefaultHeight = displayImage.offsetHeight;
   rangeX = Math.max(0, displayDefaultWidth - containerWidth);
   rangeY = Math.max(0, displayDefaultHeight - containerHeight);
-  displayImage.appendChild(container);
 };
 sadg()
 imageContainer.addEventListener(
@@ -223,7 +223,4 @@ hammertime.on("panend pancancel pinchend pinchcancel", () => {
 });
 
 
-slider.oninput = change(slider.value);
-// const slider = document.getElementById("slider");
 
-// const sliderButton = document.getElementById('slider-button')

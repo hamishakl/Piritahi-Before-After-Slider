@@ -8,7 +8,6 @@
     right: 0;
     bottom: 0;
     left: 0;
-    margin: auto;
     background: #2b2b2c;
   }
   
@@ -45,6 +44,26 @@ body {
     border: 2px solid white;
     display: flex;
     justify-content: center;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.img-wrap{
+    position: relative;
+    width: 900px;
+    height: 600px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 .container .img {
     position: absolute;
@@ -55,10 +74,10 @@ body {
     background-size: 900px 100%;
 }
 #background-img {
-    background-image: url('after.jpeg');
+    background-image: url('before.jpeg');
 }
 #foreground-img {
-    background-image: url('before.jpeg');
+    background-image: url('after.jpeg');
     width: 50%;
 }
 .container .slider {
