@@ -1,4 +1,31 @@
-html {
+
+  .imageContainer {
+    width: 900px;
+    height: 600px;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: #2b2b2c;
+  }
+  
+  
+  
+  
+  #hud {
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+    padding: 10px 20px;
+    color: #FFF;
+    font-family: sans-serif;
+    font-size: 1.2em;
+    pointer-events: none;
+  }
+
+  html {
     box-sizing: border-box;
 }
 *, *:before, *:after {
@@ -94,7 +121,8 @@ body {
     border-width: 0 2px 2px 0;
     transform: rotate(135deg);
 }
-
+.slider{
+}
 #slider-wrapper{
   display: flex;
   flex-direction: row;
