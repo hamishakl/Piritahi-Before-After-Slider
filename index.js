@@ -35,7 +35,6 @@ const slider = document.getElementById("slider");
 const sliderButton = document.getElementById("slider-button");
 
 const change = (e) => {
-  console.log("asdas");
   const sliderPos = e;
   const fore = document.getElementById("foreground-img");
   fore.style.width = `${sliderPos}%`;
@@ -138,6 +137,15 @@ const hammertime = new Hammer(imageContainer);
 
 hammertime.get("pinch").set({ enable: true });
 hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL });
+
+//swipe
+
+
+
+hammertime.on('swipe', function() {
+	change(slider.value++)
+  console.log(slider.value)
+});
 
 hammertime.on("pan", (ev) => {
   displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
