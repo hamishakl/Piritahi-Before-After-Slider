@@ -140,6 +140,15 @@ hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL });
 
 //swipe
 
+hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL, pointers: 1 });
+
+hammertime.on("panleft panright", function(ev) {
+    if (ev.type === 'panleft') {
+      change(slider.value--)
+    } else if (ev.type === 'panright') {
+      change(slider.value++)
+    } 
+});
 
 
 hammertime.on('swipe', function() {
