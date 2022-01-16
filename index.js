@@ -35,10 +35,15 @@ const slider = document.getElementById("slider");
 const sliderButton = document.getElementById("slider-button");
 
 const change = (e) => {
-  const sliderPos = e;
+  // const sliderPos = e;
   const fore = document.getElementById("foreground-img");
-  fore.style.width = `${sliderPos}%`;
-  sliderButton.style.left = `calc(${sliderPos}% - 18px)`;
+  const border = document.getElementById("border");
+  // fore.style.width = `${sliderPos}%`;
+  // sliderButton.style.left = `calc(${sliderPos}% - 18px)`;
+  let slideValue = document.getElementById("slider").value;
+  fore.style.clipPath = "polygon(0 0," + slideValue + "% 0," + slideValue + "% 100%, 0 100%)";
+  border.style.clipPath = "polygon(0 0," + slideValue + "% 0," + slideValue + "% 100%, 0 100%)";
+
 };
 
 function resizeContainer() {
@@ -134,26 +139,19 @@ function updateRange() {
 }
 
 const hammertime = new Hammer(imageContainer);
+const swiper = new Hammer(imageContainer);
 
 hammertime.get("pinch").set({ enable: true });
-hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL });
+hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 2 });
 
-//swipe
+swiper.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 1 });
 
-hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL, pointers: 1 });
-
-hammertime.on("panleft panright", function(ev) {
-    if (ev.type === 'panleft') {
-      change(slider.value--)
-    } else if (ev.type === 'panright') {
-      change(slider.value++)
-    } 
-});
-
-
-hammertime.on('swipe', function() {
-	change(slider.value++)
-  console.log(slider.value)
+swiper.on("panleft panright", function (ev) {
+  if (ev.type === "panleft") {
+    change(slider.value--);
+  } else if (ev.type === "panright") {
+    change(slider.value++);
+  }
 });
 
 hammertime.on("pan", (ev) => {
@@ -183,3 +181,15 @@ hammertime.on("panend pancancel pinchend pinchcancel", () => {
   displayImageX = displayImageCurrentX;
   displayImageY = displayImageCurrentY;
 });
+
+const imgHeight = () => {
+  var myImg = document.querySelector("#background-img");
+  var currWidth = myImg.clientWidth;
+  var currHeight = myImg.clientHeight;
+  document.getElementById('container').style.height = currHeight
+}
+
+window.onload = function() {
+  imgHeight()
+  console.log('loaded')
+};
