@@ -41,8 +41,9 @@ const change = (e) => {
   // fore.style.width = `${sliderPos}%`;
   // sliderButton.style.left = `calc(${sliderPos}% - 18px)`;
   let slideValue = document.getElementById("slider").value;
+  let slideValue2 = (document.getElementById("slider").value)*1.002;
   fore.style.clipPath = "polygon(0 0," + slideValue + "% 0," + slideValue + "% 100%, 0 100%)";
-  border.style.clipPath = "polygon(0 0," + slideValue + "% 0," + slideValue + "% 100%, 0 100%)";
+  border.style.clipPath = "polygon(0 0," + slideValue2+ "% 0," + slideValue2 + "% 100%, 0 100%)";
 
 };
 
