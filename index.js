@@ -1,6 +1,6 @@
 "use strict";
 
-const imageContainer = document.querySelector(".container");
+const imageContainer = document.querySelector(".slidecontainer");
 const hud = document.querySelector("#hud");
 
 let minScale = 1;
@@ -185,10 +185,9 @@ hammertime.on("panend pancancel pinchend pinchcancel", () => {
 });
 
 const imgHeight = () => {
-  var myImg = document.querySelector("#background-img");
-  var currWidth = myImg.clientWidth;
+  var myImg = document.getElementById("#background-img");
   var currHeight = myImg.clientHeight;
-  document.getElementById("container").style.height = currHeight;
+  document.getElementById("slidecontainer").style.height = currHeight;
 };
 
 window.onload = function () {

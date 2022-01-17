@@ -13,7 +13,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-.container {
+.slidecontainer {
   position: relative;
   width: 95vw;
   height: 95vh;
@@ -40,7 +40,7 @@ body {
   bottom: 0;
   left: 0;
 }
-.container .img {
+.slidecontainer .img {
   position: absolute;
   top: 0;
   left: 0;
@@ -59,7 +59,7 @@ body {
   position: relative;
   clip-path: polygon(0px 0px, 50% 0px, 50% 100%, 0px 100%);
 }
-.container .slider {
+.slidecontainer .slider {
   position: absolute;
   -webkit-appearance: none;
   appearance: none;
@@ -73,10 +73,10 @@ body {
   justify-content: center;
   align-items: center;
 }
-.container .slider:hover {
+.slidecontainer .slider:hover {
   background: rgba(242, 242, 242, 0.1);
 }
-.container .slider::-webkit-slider-thumb {
+.slidecontainer .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 6px;
@@ -84,13 +84,13 @@ body {
   background: white;
   cursor: pointer;
 }
-.container .slider::-moz-range-thumb {
+.slidecontainer .slider::-moz-range-thumb {
   width: 6px;
   height: 600px;
   background: white;
   cursor: pointer;
 }
-.container .slider-button {
+.slidecontainer .slider-button {
   position: absolute;
   width: 30px;
   height: 30px;
@@ -102,7 +102,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-.container .slider-button:after {
+.slidecontainer .slider-button:after {
   content: "";
   padding: 3px;
   display: inline-block;
@@ -111,7 +111,7 @@ body {
   transform: rotate(-45deg);
   margin-left: 2em;
 }
-.container .slider-button:before {
+.slidecontainer .slider-button:before {
   content: "";
   padding: 3px;
   display: inline-block;
@@ -121,7 +121,7 @@ body {
 }
 .slider {
   width: 100%;
-  display: none;
+  /* display: none; */
 }
 #slider-wrapper {
   display: flex;
