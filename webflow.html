@@ -1,0 +1,275 @@
+<script>
+  "use strict";
+
+  const imageContainer = document.querySelector(".slidecontainer");
+  const hud = document.querySelector("#hud");
+
+  let minScale = 1;
+  let maxScale = 4;
+  let imageWidth;
+  let imageHeight;
+  let containerWidth;
+  let containerHeight;
+  let displayImageX = 0;
+  let displayImageY = 0;
+  let displayImageScale = 1;
+
+  let displayDefaultWidth;
+  let displayDefaultHeight;
+
+  let rangeX = 0;
+  let rangeMaxX = 0;
+  let rangeMinX = 0;
+
+  let rangeY = 0;
+  let rangeMaxY = 0;
+  let rangeMinY = 0;
+
+  let displayImageRangeY = 0;
+
+  let displayImageCurrentX = 0;
+  let displayImageCurrentY = 0;
+  let displayImageCurrentScale = 1;
+
+  const slider = document.getElementById("slider");
+
+  const sliderButton = document.getElementById("slider-button");
+
+  const change = (e) => {
+    // const sliderPos = e;
+    const fore = document.getElementById("foreground-img");
+    const border = document.getElementById("border");
+    // fore.style.width = `${sliderPos}%`;
+    // sliderButton.style.left = `calc(${sliderPos}% - 18px)`;
+    let slideValue = document.getElementById("slider").value;
+    let slideValue2 = document.getElementById("slider").value * 1.002;
+    fore.style.clipPath =
+      "polygon(0 0," + slideValue + "% 0," + slideValue + "% 100%, 0 100%)";
+    border.style.clipPath =
+      "polygon(0 0," + slideValue2 + "% 0," + slideValue2 + "% 100%, 0 100%)";
+  };
+
+  function resizeContainer() {
+    containerWidth = imageContainer.offsetWidth;
+    containerHeight = imageContainer.offsetHeight;
+    if (
+      displayDefaultWidth !== undefined &&
+      displayDefaultHeight !== undefined
+    ) {
+      displayDefaultWidth = displayImage.offsetWidth;
+      displayDefaultHeight = displayImage.offsetHeight;
+      updateRange();
+      displayImageCurrentX = clamp(displayImageX, rangeMinX, rangeMaxX);
+      displayImageCurrentY = clamp(displayImageY, rangeMinY, rangeMaxY);
+      updateDisplayImage(
+        displayImageCurrentX,
+        displayImageCurrentY,
+        displayImageCurrentScale
+      );
+    }
+  }
+
+  resizeContainer();
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(min, value), max);
+  }
+
+  function clampScale(newScale) {
+    return clamp(newScale, minScale, maxScale);
+  }
+
+  window.addEventListener("resize", resizeContainer, true);
+
+  const displayImage = document.getElementById("container");
+  const sadg = () => {
+    imageWidth = displayImage.width;
+    imageHeight = displayImage.height;
+    displayImage.addEventListener(
+      "mousedown",
+      (e) => e.preventDefault(),
+      false
+    );
+    displayDefaultWidth = displayImage.offsetWidth;
+    displayDefaultHeight = displayImage.offsetHeight;
+    rangeX = Math.max(0, displayDefaultWidth - containerWidth);
+    rangeY = Math.max(0, displayDefaultHeight - containerHeight);
+  };
+  sadg();
+  imageContainer.addEventListener(
+    "wheel",
+    (e) => {
+      displayImageScale = displayImageCurrentScale = clampScale(
+        displayImageScale + e.wheelDelta / 800
+      );
+      updateRange();
+      displayImageCurrentX = clamp(displayImageCurrentX, rangeMinX, rangeMaxX);
+      displayImageCurrentY = clamp(displayImageCurrentY, rangeMinY, rangeMaxY);
+      updateDisplayImage(
+        displayImageCurrentX,
+        displayImageCurrentY,
+        displayImageScale
+      );
+    },
+    false
+  );
+
+  function updateDisplayImage(x, y, scale) {
+    const transform =
+      "translateX(" +
+      x +
+      "px) translateY(" +
+      y +
+      "px) translateZ(0px) scale(" +
+      scale +
+      "," +
+      scale +
+      ")";
+    displayImage.style.transform = transform;
+    displayImage.style.WebkitTransform = transform;
+    displayImage.style.msTransform = transform;
+  }
+
+  function updateRange() {
+    rangeX = Math.max(
+      0,
+      Math.round(displayDefaultWidth * displayImageCurrentScale) -
+        containerWidth
+    );
+    rangeY = Math.max(
+      0,
+      Math.round(displayDefaultHeight * displayImageCurrentScale) -
+        containerHeight
+    );
+
+    rangeMaxX = Math.round(rangeX / 2);
+    rangeMinX = 0 - rangeMaxX;
+
+    rangeMaxY = Math.round(rangeY / 2);
+    rangeMinY = 0 - rangeMaxY;
+  }
+
+  const hammertime = new Hammer(imageContainer);
+  const swiper = new Hammer(imageContainer);
+
+  hammertime.get("pinch").set({ enable: true });
+  hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 2 });
+
+  swiper.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 1 });
+
+  swiper.on("panleft panright", function (ev) {
+    if (ev.type === "panleft") {
+      change(slider.value--);
+    } else if (ev.type === "panright") {
+      change(slider.value++);
+    }
+  });
+
+  hammertime.on("pan", (ev) => {
+    displayImageCurrentX = clamp(
+      displayImageX + ev.deltaX,
+      rangeMinX,
+      rangeMaxX
+    );
+    displayImageCurrentY = clamp(
+      displayImageY + ev.deltaY,
+      rangeMinY,
+      rangeMaxY
+    );
+    updateDisplayImage(
+      displayImageCurrentX,
+      displayImageCurrentY,
+      displayImageScale
+    );
+  });
+
+  hammertime.on("pinch pinchmove", (ev) => {
+    displayImageCurrentScale = clampScale(ev.scale * displayImageScale);
+    updateRange();
+    displayImageCurrentX = clamp(
+      displayImageX + ev.deltaX,
+      rangeMinX,
+      rangeMaxX
+    );
+    displayImageCurrentY = clamp(
+      displayImageY + ev.deltaY,
+      rangeMinY,
+      rangeMaxY
+    );
+    updateDisplayImage(
+      displayImageCurrentX,
+      displayImageCurrentY,
+      displayImageCurrentScale
+    );
+  });
+
+  hammertime.on("panend pancancel pinchend pinchcancel", () => {
+    displayImageScale = displayImageCurrentScale;
+    displayImageX = displayImageCurrentX;
+    displayImageY = displayImageCurrentY;
+  });
+
+  const imgHeight = () => {
+    var myImg = document.querySelector("#img-wrap");
+    var currWidth = myImg.clientWidth;
+    var currHeight = myImg.clientHeight;
+    const wrapper = document.getElementById("slider-wrapper");
+    const innerContainer = document.getElementById("container");
+
+    // wrapper.style.height = currHeight;
+    // wrapper.style.width = currWidth;
+    // innerContainer.style.height = currHeight;
+    // innerContainer.style.width = currWidth;
+
+    innerContainer.setAttribute(
+      "style",
+      `width: ${currWidth}px; height: ${currHeight}px`
+    );
+    wrapper.setAttribute(
+      "style",
+      `width: ${currWidth}px; height: ${currHeight}px`
+    );
+    console.log(currHeight);
+    console.log(currWidth);
+    console.log(wrapper);
+  };
+
+  window.addEventListener("load", function () {
+    imgHeight();
+    console.log("loaded");
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+  html {
+    box-sizing: border-box;
+  }
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  } 
+
+  .slidecontainer .img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: 900px 100%;
+  }
+  #background-img {
+  }
+  #foreground-img {
+    width: 100%;
+    position: relative;
+    clip-path: polygon(0px 0px, 50% 0px, 50% 100%, 0px 100%);
+  }
+  #border {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    /* position: absolute */
+    clip-path: polygon(0px 0px, 50% 0px, 50% 100%, 0px 100%);
+  }
+</style>

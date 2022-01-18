@@ -15,7 +15,7 @@ body {
 }
 .container {
   position: relative;
-  width: 95vw;
+  /* width: 95vw; */
   height: 95vh;
   border: 2px solid white;
   display: flex;
