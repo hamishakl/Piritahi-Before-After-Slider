@@ -145,15 +145,22 @@ const swiper = new Hammer(imageContainer);
 
 hammertime.get("pinch").set({ enable: true, pointers: 2 });
 hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 2 });
+hammertime.get('rotate').set({ enable: true });
+
+hammertime.on("rotate", function (ev) {
+  console.log()
+})
 
 swiper.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 1 });
 
 swiper.on("panleft panright panup pandown", function (ev) {
   if (ev.type === "panleft" || ev.type === "panup"){
   change(slider.value--);
+  console.log('panning')
 } 
   else if (ev.type === "panright" || ev.type === "pandown") {
     change(slider.value++);
+    console.log('panning')
   }
 });
 
@@ -177,6 +184,7 @@ hammertime.on("pinch pinchmove", (ev) => {
     displayImageCurrentY,
     displayImageCurrentScale
   );
+  console.log("dasd")
 });
 
 hammertime.on("panend pancancel pinchend pinchcancel", () => {
