@@ -1,3 +1,10 @@
+@media (min-width: 600px) {
+  #box {
+    width: 50vw;
+    height: 50vh;
+  }
+}
+
 html {
   box-sizing: border-box;
 }
@@ -6,9 +13,15 @@ html {
 *:after {
   box-sizing: inherit;
 }
+#wrapper {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 body {
   margin: 0;
-  height: 100vh;
+  height: 120vh;
   display: flex;
   justify-content: center;
   align-items: center;
