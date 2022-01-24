@@ -3,8 +3,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <script src="touch-emulator.js"></script>
-    <script> TouchEmulator(); </script>
     <title>Piritahi.nz slider</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
@@ -25,16 +23,18 @@
       </div>
       <div class="slider-button" id="slider-button"></div>
       <input
-        type="range"
-        min="1"
-        value="50"
-        max="100"
-        class="slider"
-        name="slider"
-        id="slider"
-        oninput="change(this.value)"
+      type="range"
+      min="1"
+      value="50"
+      max="100"
+      class="slider"
+      name="slider"
+      id="slider"
+      oninput="change(this.value)"
       />
     </div>
+    <script src="touch-emulator.js"></script>
+    <script> TouchEmulator(); </script>
     <script src="index.js"></script>
   </body>
 </html>

@@ -142,7 +142,8 @@ function updateRange() {
 
 const hammertime = new Hammer(imageContainer);
 const swiper = new Hammer(imageContainer);
-
+const emulator = new Hammer(imageContainer)
+emulator.get("pinch").set({enable: true, threshold: 0, pointers: 0})
 hammertime.get("pinch").set({ enable: true, pointers: 2 });
 hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 2 });
 hammertime.get('rotate').set({ enable: true });
@@ -154,13 +155,13 @@ hammertime.on("rotate", function (ev) {
 swiper.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 1 });
 
 swiper.on("panleft panright panup pandown", function (ev) {
-  if (ev.type === "panleft" || ev.type === "panup"){
+  if (ev.type === "panleft" && ev.srcEvent.shiftKey === false){
   change(slider.value--);
-  console.log('panning')
+  console.log(ev.srcEvent.shiftKey)
 } 
-  else if (ev.type === "panright" || ev.type === "pandown") {
+else if (ev.type === "panright" && ev.srcEvent.shiftKey === false) {
+    console.log(ev.srcEvent.shiftKey)
     change(slider.value++);
-    console.log('panning')
   }
 });
 
@@ -172,9 +173,22 @@ hammertime.on("pan", (ev) => {
     displayImageCurrentY,
     displayImageScale
   );
+  console.log('adsad');
 });
 
 hammertime.on("pinch pinchmove", (ev) => {
+  displayImageCurrentScale = clampScale(ev.scale * displayImageScale);
+  updateRange();
+  displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
+  displayImageCurrentY = clamp(displayImageY + ev.deltaY, rangeMinY, rangeMaxY);
+  updateDisplayImage(
+    displayImageCurrentX,
+    displayImageCurrentY,
+    displayImageCurrentScale
+  );
+  console.log("dasd")
+});
+emulator.on("pinch pinchmove", (ev) => {
   displayImageCurrentScale = clampScale(ev.scale * displayImageScale);
   updateRange();
   displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
@@ -204,3 +218,17 @@ window.onload = function () {
   imgHeight();
   console.log("loaded");
 };
+
+
+function log(ev) {
+  if (ev.shiftKey === true && ev.type === "panright") {
+    console.log('right');
+  }
+  if (ev.shiftKey === true && ev.type === "panleft") {
+    console.log('left');
+  }
+ }
+ 
+ document.body.addEventListener('touchstart', log, false);
+ document.body.addEventListener('touchmove', log, false);
+ document.body.addEventListener('touchend', log, false);

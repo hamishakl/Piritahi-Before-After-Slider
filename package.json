@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "hammer-touchemulator": "^0.0.2"
+    "hammer-touchemulator": "^0.0.2",
+    "touch-emulator": "^1.0.0"
   }
 }
