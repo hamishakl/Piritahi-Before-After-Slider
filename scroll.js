@@ -47,8 +47,6 @@ function enableScroll() {
   window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
 }
 
-console.log("script works ");
-
 const mouseArea = document.getElementById("box");
 
 mouseArea.addEventListener("mouseenter", (e) => {

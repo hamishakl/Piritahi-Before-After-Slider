@@ -1,7 +1,6 @@
 "use strict";
 
 const imageContainer = document.querySelector(".container");
-// const hud = document.querySelector("#hud");
 
 let minScale = 1;
 let maxScale = 4;
@@ -35,11 +34,8 @@ const slider = document.getElementById("slider");
 const sliderButton = document.getElementById("slider-button");
 
 const change = () => {
-  // const sliderPos = e;
   const fore = document.getElementById("foreground-img");
   const border = document.getElementById("border");
-  // fore.style.width = `${sliderPos}%`;
-  // sliderButton.style.left = `calc(${sliderPos}% - 18px)`;
   let slideValue = document.getElementById("slider").value;
   let slideValue2 = document.getElementById("slider").value * 1.002;
   fore.style.clipPath =
@@ -143,7 +139,6 @@ function updateRange() {
 const hammertime = new Hammer(imageContainer);
 const swiper = new Hammer(imageContainer);
 const emulator = new Hammer(imageContainer);
-// emulator.get("pinch").set({enable: true, threshold: 0, pointers: 0})
 hammertime.get("pinch").set({ enable: true, pointers: 2 });
 hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 2 });
 hammertime.get("rotate").set({ enable: true });
@@ -161,13 +156,11 @@ swiper.on("panleft panright panup pandown", function (ev) {
     change(slider.value++);
   }
   else {
-    test(ev)
+    moveOnPan(ev)
   }
 });
 
-const test = (ev) => {
-
-  console.log("pan");
+const moveOnPan = (ev) => {
   displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
   displayImageCurrentY = clamp(displayImageY + ev.deltaY, rangeMinY, rangeMaxY);
   updateDisplayImage(
@@ -188,7 +181,7 @@ hammertime.on("pan", (ev) => {
   );
 });
 
-const moveAround = (ev) => {
+const moveOnPinch = (ev) => {
   displayImageCurrentScale = clampScale(ev.scale * displayImageScale);
   updateRange();
   displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
@@ -201,16 +194,12 @@ const moveAround = (ev) => {
 };
 
 hammertime.on("pinch pinchmove drag", (ev) => {
-  // if (ev.srcEvent.shiftKey === true){
-  //  console.log(ev.pointerType === touch)
-  // }
   if (ev.pointerType === "touch") {
-    moveAround(ev);
+    moveOnPinch(ev);
   }
 });
 
 hammertime.on("panend pancancel pinchend pinchcancel", () => {
-  console.log("pan end");
   displayImageScale = displayImageCurrentScale;
   displayImageX = displayImageCurrentX;
   displayImageY = displayImageCurrentY;
@@ -224,11 +213,4 @@ const imgHeight = () => {
 
 window.onload = function () {
   imgHeight();
-  console.log("loaded");
 };
-
-imageContainer.addEventListener('keydown', (e) => {
-  if (e === 'shift') {
-    console.log(e)
-  }
-})
