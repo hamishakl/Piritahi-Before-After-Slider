@@ -1,7 +1,7 @@
 "use strict";
 
 const imageContainer = document.querySelector(".container");
-const hud = document.querySelector("#hud");
+// const hud = document.querySelector("#hud");
 
 let minScale = 1;
 let maxScale = 4;
@@ -34,7 +34,7 @@ const slider = document.getElementById("slider");
 
 const sliderButton = document.getElementById("slider-button");
 
-const change = (e) => {
+const change = () => {
   // const sliderPos = e;
   const fore = document.getElementById("foreground-img");
   const border = document.getElementById("border");
@@ -160,7 +160,22 @@ swiper.on("panleft panright panup pandown", function (ev) {
   } else if (ev.type === "panright" && ev.srcEvent.shiftKey === false) {
     change(slider.value++);
   }
+  else {
+    test(ev)
+  }
 });
+
+const test = (ev) => {
+
+  console.log("pan");
+  displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
+  displayImageCurrentY = clamp(displayImageY + ev.deltaY, rangeMinY, rangeMaxY);
+  updateDisplayImage(
+    displayImageCurrentX,
+    displayImageCurrentY,
+    displayImageScale
+  );
+}
 
 hammertime.on("pan", (ev) => {
   console.log("pan");
@@ -211,3 +226,9 @@ window.onload = function () {
   imgHeight();
   console.log("loaded");
 };
+
+imageContainer.addEventListener('keydown', (e) => {
+  if (e === 'shift') {
+    console.log(e)
+  }
+})
