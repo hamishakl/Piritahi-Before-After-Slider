@@ -78,7 +78,7 @@ function clampScale(newScale) {
 window.addEventListener("resize", resizeContainer, true);
 
 const displayImage = document.getElementById("container");
-const sadg = () => {
+const preventDrag = () => {
   imageWidth = displayImage.width;
   imageHeight = displayImage.height;
   displayImage.addEventListener("mousedown", (e) => e.preventDefault(), false);
@@ -87,7 +87,7 @@ const sadg = () => {
   rangeX = Math.max(0, displayDefaultWidth - containerWidth);
   rangeY = Math.max(0, displayDefaultHeight - containerHeight);
 };
-sadg();
+preventDrag();
 imageContainer.addEventListener(
   "wheel",
   (e) => {
@@ -142,30 +142,28 @@ function updateRange() {
 
 const hammertime = new Hammer(imageContainer);
 const swiper = new Hammer(imageContainer);
-const emulator = new Hammer(imageContainer)
+const emulator = new Hammer(imageContainer);
 // emulator.get("pinch").set({enable: true, threshold: 0, pointers: 0})
 hammertime.get("pinch").set({ enable: true, pointers: 2 });
 hammertime.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 2 });
-hammertime.get('rotate').set({ enable: true });
+hammertime.get("rotate").set({ enable: true });
 
 hammertime.on("rotate", function (ev) {
-  console.log()
-})
+  console.log();
+});
 
-swiper.get("pan").set({ direction: Hammer.DIRECTION_ALL, pointers: 1 });
+swiper.get("pan").set({ direction: Hammer.DIRECTION_ALL });
 
 swiper.on("panleft panright panup pandown", function (ev) {
-  if (ev.type === "panleft" && ev.srcEvent.shiftKey === false){
-  change(slider.value--);
-  console.log(ev.srcEvent.shiftKey)
-} 
-else if (ev.type === "panright" && ev.srcEvent.shiftKey === false) {
-    console.log(ev.srcEvent.shiftKey)
+  if (ev.type === "panleft" && ev.srcEvent.shiftKey === false) {
+    change(slider.value--);
+  } else if (ev.type === "panright" && ev.srcEvent.shiftKey === false) {
     change(slider.value++);
   }
 });
 
 hammertime.on("pan", (ev) => {
+  console.log("pan");
   displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
   displayImageCurrentY = clamp(displayImageY + ev.deltaY, rangeMinY, rangeMaxY);
   updateDisplayImage(
@@ -175,7 +173,7 @@ hammertime.on("pan", (ev) => {
   );
 });
 
-hammertime.on("pinch pinchmove", (ev) => {
+const moveAround = (ev) => {
   displayImageCurrentScale = clampScale(ev.scale * displayImageScale);
   updateRange();
   displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
@@ -185,20 +183,19 @@ hammertime.on("pinch pinchmove", (ev) => {
     displayImageCurrentY,
     displayImageCurrentScale
   );
+};
+
+hammertime.on("pinch pinchmove drag", (ev) => {
+  // if (ev.srcEvent.shiftKey === true){
+  //  console.log(ev.pointerType === touch)
+  // }
+  if (ev.pointerType === "touch") {
+    moveAround(ev);
+  }
 });
-// emulator.on("pinch pinchmove", (ev) => {
-//   displayImageCurrentScale = clampScale(ev.scale * displayImageScale);
-//   updateRange();
-//   displayImageCurrentX = clamp(displayImageX + ev.deltaX, rangeMinX, rangeMaxX);
-//   displayImageCurrentY = clamp(displayImageY + ev.deltaY, rangeMinY, rangeMaxY);
-//   updateDisplayImage(
-//     displayImageCurrentX,
-//     displayImageCurrentY,
-//     displayImageCurrentScale
-//   );
-// });
 
 hammertime.on("panend pancancel pinchend pinchcancel", () => {
+  console.log("pan end");
   displayImageScale = displayImageCurrentScale;
   displayImageX = displayImageCurrentX;
   displayImageY = displayImageCurrentY;
@@ -206,7 +203,6 @@ hammertime.on("panend pancancel pinchend pinchcancel", () => {
 
 const imgHeight = () => {
   var myImg = document.querySelector("#background-img");
-  var currWidth = myImg.clientWidth;
   var currHeight = myImg.clientHeight;
   document.getElementById("container").style.height = currHeight;
 };
@@ -215,19 +211,3 @@ window.onload = function () {
   imgHeight();
   console.log("loaded");
 };
-
-
-function log(ev) {
-  if (ev.shiftKey === true && ev.type === "panright") {
-    console.log('right');
-  }
-  if (ev.shiftKey === true && ev.type === "panleft") {
-    console.log('left');
-  }
- }
- 
- document.body.addEventListener('touchstart', log, false);
- document.body.addEventListener('touchmove', log, false);
- document.body.addEventListener('touchend', log, false);
-
- 
