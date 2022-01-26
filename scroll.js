@@ -37,7 +37,6 @@ function disableScroll() {
   window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
   window.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
   window.addEventListener("keydown", preventDefaultForScrollKeys, false);
-  console.log("scroll disable");
 }
 
 // call this to Enable
@@ -46,7 +45,6 @@ function enableScroll() {
   window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
   window.removeEventListener("touchmove", preventDefault, wheelOpt);
   window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
-  console.log("scroll enable ");
 }
 
 console.log("script works ");
@@ -54,17 +52,9 @@ console.log("script works ");
 const mouseArea = document.getElementById("box");
 
 mouseArea.addEventListener("mouseenter", (e) => {
-  window.addEventListener("DOMMouseScroll", preventDefault, false); // older FF
-  window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-  window.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
-  window.addEventListener("keydown", preventDefaultForScrollKeys, false);
-  console.log("scroll disable");
+  disableScroll()
 });
 
 mouseArea.addEventListener("mouseleave", (e) => {
-  window.removeEventListener("DOMMouseScroll", preventDefault, false);
-  window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
-  window.removeEventListener("touchmove", preventDefault, wheelOpt);
-  window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
-  console.log("scroll enable ");
+  enableScroll()
 });
