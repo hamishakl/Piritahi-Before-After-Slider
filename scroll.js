@@ -47,7 +47,7 @@ function enableScroll() {
   window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
 }
 
-const mouseArea = document.getElementById("box");
+const mouseArea = document.getElementById("slider-crop");
 
 mouseArea.addEventListener("mouseenter", (e) => {
   disableScroll()

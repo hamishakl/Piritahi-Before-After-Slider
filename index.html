@@ -9,31 +9,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-    <div id="wrapper">
-      <h3>Best used on mobile for now. <br><br>Drag one finger across the screen to view the progress made in the area. <br><br>Use both fingers to zoom in & out/pan around.</h3>
-      <div id="box">
-        <div class="container" id="container">
-          <div id="img-wrap">
-            <img src="MangereWestBefore.jpg" class="img" id="background-img"></img>
-            <div id="border">
-              <img src="MangereWestNow.jpg" class="img" id="foreground-img"></img>
+      <div id="wrapper">
+        <h3>Best used on mobile for now. <br><br>Drag one finger across the screen to view the progress made in the area. <br><br>Use both fingers to zoom in & out/pan around.</h3>
+        <div id="slider-crop">
+          <container class="slider--container" id="slider--container">
+            <div id="img--div">
+              <img src="MangereWestBefore.jpg" class="slider-img" id="before-img"></img>
+              <div id="after-img-border">
+                <img src="MangereWestNow.jpg" class="slider-img" id="after-img"></img>
+              </div>
             </div>
-          </div>
+          </container>
         </div>
+        <input
+        type="range"
+        min="1"
+        value="50"
+        max="100"
+        class="slider--range"
+        name="slider"
+        id="slider--range"
+        oninput="change(this.value)"
+        />
       </div>
-      <div class="slider-button" id="slider-button"></div>
-      <input
-      type="range"
-      min="1"
-      value="50"
-      max="100"
-      class="slider"
-      name="slider"
-      id="slider"
-      oninput="change(this.value)"
-      />
-    </div>
-    <script src="index.js"></script>
-    <script src="scroll.js"></script>
-  </body>
+      <script src="scroll.js"></script>
+      <script src="index.js"></script>
+    </body>
 </html>

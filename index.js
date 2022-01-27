@@ -1,6 +1,6 @@
 "use strict";
 
-const imageContainer = document.querySelector(".container");
+const imageContainer = document.querySelector(".slider--container");
 
 let minScale = 1;
 let maxScale = 4;
@@ -29,15 +29,15 @@ let displayImageCurrentX = 0;
 let displayImageCurrentY = 0;
 let displayImageCurrentScale = 1;
 
-const slider = document.getElementById("slider");
+const slider = document.getElementById("slider--range");
 
-const sliderButton = document.getElementById("slider-button");
+const sliderButton = document.getElementById("slider--button");
 
 const change = () => {
-  const fore = document.getElementById("foreground-img");
-  const border = document.getElementById("border");
-  let slideValue = document.getElementById("slider").value;
-  let slideValue2 = document.getElementById("slider").value * 1.002;
+  const fore = document.getElementById("after-img");
+  const border = document.getElementById("after-img-border");
+  let slideValue = document.getElementById("slider--range").value;
+  let slideValue2 = document.getElementById("slider--range").value * 1.002;
   fore.style.clipPath =
     "polygon(0 0," + slideValue + "% 0," + slideValue + "% 100%, 0 100%)";
   border.style.clipPath =
@@ -73,7 +73,7 @@ function clampScale(newScale) {
 
 window.addEventListener("resize", resizeContainer, true);
 
-const displayImage = document.getElementById("container");
+const displayImage = document.getElementById("slider--container");
 const preventDrag = () => {
   imageWidth = displayImage.width;
   imageHeight = displayImage.height;
@@ -206,9 +206,9 @@ hammertime.on("panend pancancel pinchend pinchcancel", () => {
 });
 
 const imgHeight = () => {
-  var myImg = document.querySelector("#background-img");
+  var myImg = document.querySelector("#before-img");
   var currHeight = myImg.clientHeight;
-  document.getElementById("container").style.height = currHeight;
+  document.getElementById("slider--container").style.height = currHeight;
 };
 
 window.onload = function () {
