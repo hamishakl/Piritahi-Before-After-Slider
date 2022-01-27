@@ -2,5 +2,8 @@
   "dependencies": {
     "hammer-touchemulator": "^0.0.2",
     "touch-emulator": "^1.0.0"
+  },
+  "devDependencies": {
+    "purgecss": "^4.1.3"
   }
 }

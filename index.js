@@ -154,9 +154,11 @@ swiper.on("panleft panright panup pandown", function (ev) {
     change(slider.value--);
   } else if (ev.type === "panright" && ev.srcEvent.shiftKey === false) {
     change(slider.value++);
-  }
-  else {
-    moveOnPan(ev)
+  } else if (
+    (ev.type === "panright" && ev.srcEvent.shiftKey === true) ||
+    (ev.type === "panleft" && ev.srcEvent.shiftKey === true)
+  ) {
+    moveOnPan(ev);
   }
 });
 
@@ -168,7 +170,7 @@ const moveOnPan = (ev) => {
     displayImageCurrentY,
     displayImageScale
   );
-}
+};
 
 hammertime.on("pan", (ev) => {
   console.log("pan");
