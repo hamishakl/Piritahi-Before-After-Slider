@@ -2,12 +2,6 @@ html {
   box-sizing: border-box;
 }
 
-#wrapper {
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 body {
   margin: 0;
   height: 120vh;
@@ -48,7 +42,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-size: 900px 100%;
+  /* background-size: 900px 100%; */
 }
 #before-img {
   background-image: url("MangereWestBefore.jpg");
@@ -97,6 +91,9 @@ body {
 
 #slider-crop {
   overflow: hidden;
+  height: 50vh;
+  width: 70vh;
+  border: 1px black solid;
 }
 
 #after-img-border {

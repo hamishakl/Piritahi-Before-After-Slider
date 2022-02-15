@@ -1,5 +1,3 @@
-"use strict";
-
 const imageContainer = document.querySelector(".slider--container");
 
 let minScale = 1;
@@ -73,7 +71,7 @@ function clampScale(newScale) {
 
 window.addEventListener("resize", resizeContainer, true);
 
-const displayImage = document.getElementById("slider--container");
+const displayImage = document.getElementById("img--div");
 const preventDrag = () => {
   imageWidth = displayImage.width;
   imageHeight = displayImage.height;
@@ -149,16 +147,16 @@ hammertime.on("rotate", function (ev) {
 
 swiper.get("pan").set({ direction: Hammer.DIRECTION_ALL });
 
-swiper.on("panleft panright panup pandown", function (ev) {
-  if (ev.type === "panleft" && ev.srcEvent.shiftKey === false) {
-    change(slider.value--);
-  } else if (ev.type === "panright" && ev.srcEvent.shiftKey === false) {
-    change(slider.value++);
-  } else if (
-    (ev.type === "panright" && ev.srcEvent.shiftKey === true) ||
-    (ev.type === "panleft" && ev.srcEvent.shiftKey === true)
-  ) {
+swiper.on(" pan panleft panright panup pandown", function (ev) {
+  if (ev.srcEvent.shiftKey == false) {
+    if (ev.type === "panleft") {
+      change(slider.value--);
+    } else if (ev.type === "panright") {
+      change(slider.value++);
+    }
+  } else if (ev.srcEvent.shiftKey == true){
     moveOnPan(ev);
+    // console.log("pan");
   }
 });
 
@@ -198,6 +196,9 @@ const moveOnPinch = (ev) => {
 hammertime.on("pinch pinchmove drag", (ev) => {
   if (ev.pointerType === "touch") {
     moveOnPinch(ev);
+    console.log('pinch');
+  } else {
+    moveOnPinch(ev)
   }
 });
 
@@ -211,6 +212,7 @@ const imgHeight = () => {
   var myImg = document.querySelector("#before-img");
   var currHeight = myImg.clientHeight;
   document.getElementById("slider--container").style.height = currHeight;
+  document.getElementById("slider-crop").style.height = (currHeight);
 };
 
 window.onload = function () {
