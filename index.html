@@ -1,37 +1,32 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Piritahi.nz slider</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  </head>
-  <body>
-        <div id="slider-crop">
-          <container class="slider--container" id="slider--container">
-            <div id="img--div">
-              <img src="MangereWestBefore.jpg" class="slider-img" id="before-img"></img>
-              <div id="after-img-border">
-                <img src="MangereWestNow.jpg" class="slider-img" id="after-img"></img>
-              </div>
-            </div>
-          </container>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Piritahi.nz slider</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+  <div id="slider-crop" class="div-block-19">
+    <container class="slider--container" id="slider--container">
+      <div id="img--div">
+        <img src="MangereWestBefore.jpg" class="slider-img" id="before-img"></img>
+        <div id="after-img-border">
+          <img src="MangereWestNow.jpg" class="slider-img" id="after-img"></img>
         </div>
-        <input
-        type="range"
-        min="1"
-        value="50"
-        max="100"
-        class="slider--range"
-        name="slider"
-        id="slider--range"
-        oninput="change(this.value)"
-        />
-      <!-- <script src="slider.js"></script> -->
-      <script src="scroll.js"></script>
-      <script src="index.js"></script>
-    </body>
+      </div>
+    </container>
+  </div>
+  <input type="range" min="1" value="50" max="100" class="slider--range" name="slider" id="slider--range"
+    oninput="change(this.value)" />
+  <!-- <script src="slider.js"></script> -->
+  <script src="scroll.js"></script>
+  <script src="index.js"></script>
+</body>
+
 </html>

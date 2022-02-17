@@ -208,13 +208,20 @@ hammertime.on("panend pancancel pinchend pinchcancel", () => {
   displayImageY = displayImageCurrentY;
 });
 
+var elements = document.getElementsByClassName('div-block-19');
+var image = elements[0]
+
 const imgHeight = () => {
-  var myImg = document.querySelector("#before-img");
-  var currHeight = myImg.clientHeight;
-  document.getElementById("slider--container").style.height = currHeight;
-  document.getElementById("slider-crop").style.height = (currHeight);
+  let height = document.getElementById('before-img').height
+  image.style.height = height
+  console.log(image)
 };
+
+imgHeight()
 
 window.onload = function () {
   imgHeight();
 };
+
+
+
